@@ -4,7 +4,7 @@
 
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <a class="navbar-brand" href="#">Finbro App</a>
+        <a class="navbar-brand" href="#">Personal Finances App</a>
     </nav>
 </template>
 
