@@ -8,11 +8,26 @@
   <div class="container-fluid">
     <Navbar></Navbar>
     <div class="container">
-      <DatePicker></DatePicker>
-      <Chart></Chart>
+      <DatePicker :transactionDataHandler="transactionDataHandler"></DatePicker>
+      <Chart :data="data"></Chart>
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+      data() {
+        return {
+          data: []
+        }
+      },
+      methods: {
+        transactionDataHandler(data){
+          this.data = data
+        }
+      },
+  }
+</script>
 
 <style scoped>
 

@@ -4,13 +4,15 @@
 
 <template>
   <canvas id="myChart"></canvas>
+  <!-- <div v-else>Please enter a date range to get past finances</div> -->
 </template>
 
 <script>
     export default {
+        props: ['data'],
         data() {
             return {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+                labels: [],
                 datasets: [
                     {
                         label: 'Amount spent',
@@ -19,7 +21,7 @@
                         borderWidth: 1,
                         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                         hoverBorderColor: 'rgba(255,99,132,1)',
-                        data: [65, 59, 80, 81, 56, 55, 40, 10, 20, 30, 40, 50]
+                        data: []
                     }
                 ]
             }
