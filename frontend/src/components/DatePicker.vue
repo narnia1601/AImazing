@@ -23,7 +23,7 @@
 
 <script>
     export default {
-        props: ['transactionDataHandler'],
+        props: ['transactionDataHandler', 'textHandler'],
         data() {
             return {
                 startingDate: null,
@@ -33,16 +33,22 @@
         methods: {
             getTransactionsBetweenDateRanges(){
                 const url = 'http://localhost:8080/transactions'
+                var startDate = new Date(this.startingDate)
+                var endDate = new Date(this.endingDate)
                 if(this.startingDate != null && this.endingDate != null){
-                    axios.get(url, {
-                        params: {
-                            startingDate: this.startingDate,
-                            endingDate: this.endingDate
-                        }
-                    })
-                    .then(res => {
-                        this.transactionDataHandler(res.data)
-                    })
+                    if(startDate < endDate){
+                        axios.get(url, {
+                            params: {
+                                startingDate: this.startingDate,
+                                endingDate: this.endingDate
+                            }
+                        })
+                        .then(res => {
+                            this.transactionDataHandler(res.data)
+                        })
+                    }else{
+                        this.textHandler('Please enter a valid starting date and ending date range')
+                    }
                 }
             }
         }

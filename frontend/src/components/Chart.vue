@@ -4,15 +4,16 @@
 
 <template>
   <canvas id="myChart" v-if="datasets[0]['data'].length > 0"></canvas>
-  <div v-else>Please enter a date range to get past finances</div>
+  <div v-else>{{ text }}</div>
 </template>
 
 <script>
     export default {
-        props: ['data'],
+        props: ['data', 'text'],
         data() {
             return { 
                 labels: [],
+                chart: null,
                 datasets: [
                     {
                         label: 'Amount spent',
@@ -28,7 +29,8 @@
         },
         watch: {
             data(data){
-                console.log(data)
+                this.datasets[0]['data'] = []
+                this.labels = []
                 data.forEach(element => {
                     var amount = element['amount']
                     var date = element['date']
@@ -38,8 +40,8 @@
                     var formattedDate = date.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })
                     this.labels.push(formattedDate)
                     this.datasets[0]['data'].push(amount)
-                    console.log(this.datasets[0]['data'])
                 });
+                this.destroyChart()
                 setTimeout(() => {
                     this.buildChart()
                 }, 500);
@@ -48,13 +50,18 @@
         methods: {
             buildChart(){
                 const ctx = document.getElementById('myChart');
-                new Chart(ctx, {
+                this.chart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                     labels: this.labels,
                     datasets: this.datasets
                     }
                 });
+            },
+            destroyChart(){
+                if(this.chart){
+                    this.chart.destroy()
+                }
             }
         },
     }
