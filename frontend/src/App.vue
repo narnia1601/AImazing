@@ -1,12 +1,16 @@
 <script setup>
   import Navbar from './components/Navbar.vue'
   import Chart from './components/Chart.vue'
+  import DatePicker from './components/DatePicker.vue'
 </script>
 
 <template>
-  <div>
+  <div class="container-fluid">
     <Navbar></Navbar>
-    <Chart></Chart>
+    <div class="container">
+      <DatePicker></DatePicker>
+      <Chart></Chart>
+    </div>
   </div>
 </template>
 
